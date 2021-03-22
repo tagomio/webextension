@@ -36,9 +36,10 @@ module.exports = {
   plugins: [
     new CopyPlugin({
       patterns: [
-        { from: "src/icons", to: "icons" },
+        { from: "src/assets", to: "assets" },
         { from: "src/index.html" },
         { from: "manifest.json" },
+        { from: "node_modules/webextension-polyfill/dist/browser-polyfill.js" },
       ],
     }),
   ],

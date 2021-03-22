@@ -1,4 +1,4 @@
 import { render } from "react";
-import Popup from "./popup";
+import { Popup } from "./components";
 
 render(<Popup />, document.body);
