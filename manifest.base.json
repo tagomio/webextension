@@ -1,14 +1,22 @@
 {
   "manifest_version": 2,
+
   "name": "tagom-webext",
   "version": "0.1.0",
-
   "description": "WebExtension to submit tags for tagom.io.",
+
+  "icons": {
+    "16": "assets/icons/favicon-16x16.png",
+    "32": "assets/icons/favicon-32x32.png"
+  },
 
   "browser_action": {
     "default_title": "tagom",
     "default_popup": "index.html",
-    "default_icon": "assets/icons/tag-cloud_black.svg"
+    "default_icon": {
+      "16": "assets/icons/favicon-16x16.png",
+      "32": "assets/icons/favicon-32x32.png"
+    }
   },
 
   "background": {

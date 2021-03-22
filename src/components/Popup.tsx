@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { browser } from "webextension-polyfill-ts";
 
 const Popup = () => {
   const [tabUrl, setTabUrl] = useState("");
