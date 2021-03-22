@@ -47,17 +47,17 @@ module.exports = {
         { from: "src/assets", to: "chromium/assets" },
         { from: "src/index.html", to: "chromium" },
         {
-          from: "manifest.chromium.json",
+          from: "manifest/chromium.json",
           to: "chromium/manifest.json",
-          transform: mergeJson("manifest.base.json"),
+          transform: mergeJson("manifest/base.json"),
         },
         // once for firefox
         { from: "src/assets", to: "firefox/assets" },
         { from: "src/index.html", to: "firefox" },
         {
-          from: "manifest.firefox.json",
+          from: "manifest/firefox.json",
           to: "firefox/manifest.json",
-          transform: mergeJson("manifest.base.json"),
+          transform: mergeJson("manifest/base.json"),
         },
       ],
     }),
