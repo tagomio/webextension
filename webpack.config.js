@@ -2,11 +2,9 @@ const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   mode: "production",
-  entry: {
-    popup: "./src/popup.jsx",
-  },
+  entry: "./src/index.jsx",
   output: {
-    filename: "[name].js",
+    filename: "index.js",
     path: __dirname + "/dist",
   },
   module: {
@@ -39,7 +37,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         { from: "src/icons", to: "icons" },
-        { from: "src/popup.html" },
+        { from: "src/index.html" },
         { from: "manifest.json" },
       ],
     }),
