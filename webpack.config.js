@@ -14,8 +14,12 @@ const mergeJson = (fileName) => async (content, _absoluteFrom) => {
 module.exports = {
   mode: "production",
   entry: {
-    "chromium/index": "./src/index.tsx",
-    "firefox/index": "./src/index.tsx",
+    // popup script
+    "chromium/index": "./src/popup/index.tsx",
+    "firefox/index": "./src/popup/index.tsx",
+    // background script
+    "chromium/background": "./src/background/index.ts",
+    "firefox/background": "./src/background/index.ts",
   },
   output: {
     filename: "[name].js",
@@ -44,16 +48,16 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         // once for chromium
-        { from: "src/assets", to: "chromium/assets" },
-        { from: "src/index.html", to: "chromium" },
+        { from: "assets", to: "chromium/assets" },
+        { from: "src/popup/index.html", to: "chromium" },
         {
           from: "manifest/chromium.json",
           to: "chromium/manifest.json",
           transform: mergeJson("manifest/base.json"),
         },
         // once for firefox
-        { from: "src/assets", to: "firefox/assets" },
-        { from: "src/index.html", to: "firefox" },
+        { from: "assets", to: "firefox/assets" },
+        { from: "src/popup/index.html", to: "firefox" },
         {
           from: "manifest/firefox.json",
           to: "firefox/manifest.json",

@@ -1,0 +1,281 @@
+:root {
+  /* ratios for maintaining visual consistency */
+  --ratio: 1.75;
+  --s-5: calc(var(--s-4) / var(--ratio));
+  --s-4: calc(var(--s-3) / var(--ratio));
+  --s-3: calc(var(--s-2) / var(--ratio));
+  --s-2: calc(var(--s-1) / var(--ratio));
+  --s-1: calc(var(--s0) / var(--ratio));
+  --s0: 1rem;
+  --s1: calc(var(--s0) * var(--ratio));
+  --s2: calc(var(--s1) * var(--ratio));
+  --s3: calc(var(--s2) * var(--ratio));
+  --s4: calc(var(--s3) * var(--ratio));
+  --s5: calc(var(--s4) * var(--ratio));
+
+  /* zero value*/
+  --zero: 0;
+
+  /* measure width */
+  --measure: 60ch;
+}
+
+* {
+  /* in general calculate from border-box */
+  box-sizing: border-box;
+
+  /* clear default padding and margin */
+  margin: 0;
+  padding: 0;
+
+  /* in general cap to nice width */
+  max-width: var(--measure);
+}
+
+/* exceptions to above max-width rule */
+html,
+body,
+div,
+header,
+nav,
+main,
+footer {
+  max-width: none;
+}
+
+/* have initial elements take up all the space */
+html,
+body,
+main,
+#__next {
+  height: 100%;
+}
+
+/* BOX-LAYOUT */
+.el-box {
+  --box-padding: var(--s0);
+  --box-border: var(--s-5);
+  padding: var(--box-padding);
+  border: var(--box-border) solid;
+  /* required because default for custom elements is inline */
+  display: block;
+}
+.el-box * {
+  color: inherit;
+}
+
+/* CENTER-LAYOUT */
+.el-center {
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: content-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* CLUSTER-LAYOUT */
+/* 
+ * Needs wrapper element inside container.
+ */
+.el-cluster {
+  --cluster-margin: var(--s0);
+  --cluster-justify-content: flex-start;
+  overflow: hidden;
+}
+.el-cluster > * {
+  display: flex;
+  flex-wrap: wrap;
+  margin: calc(var(--cluster-margin) / 2 * -1);
+  justify-content: var(--cluster-justify-content);
+  align-items: center;
+}
+.el-cluster > * > * {
+  margin: calc(var(--cluster-margin) / 2);
+}
+
+/* COVER-LAYOUT */
+.el-cover {
+  --cover-padding: var(--s0);
+  --cover-margin: var(--s0);
+  --cover-min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: var(--cover-min-height);
+  padding: var(--cover-padding);
+}
+.el-cover > * {
+  margin-top: var(--cover-margin);
+  margin-bottom: var(--cover-margin);
+}
+/* if just on child, it is main */
+.el-cover > :only-child {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+/* if two childs, heading and main */
+.el-cover > :last-child:nth-child(2) {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.el-cover > :first-child:nth-last-child(2) {
+  margin-top: 0;
+}
+/* if three childs, heading, main, footer */
+.el-cover > :nth-child(2):nth-last-child(2) {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.el-cover > :first-child:nth-last-child(3) {
+  margin-top: 0;
+}
+.el-cover > :last-child::nth-child(3) {
+  margin-bottom: 0;
+}
+
+/* FRAME-LAYOUT */
+.el-frame {
+  --frame-n: 9;
+  --frame-d: 16;
+  padding-bottom: calc(var(--frame-n) / var(--frame-d) * 100%);
+  position: relative;
+}
+.el-frame > * {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.el-frame > img,
+.el-frame > video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* GRID-LAYOUT */
+.el-grid {
+  --grid-grid-gap: var(--s0);
+  --grid-column-min-width: var(--s5);
+  display: grid;
+  grid-gap: var(--grid-grid-gap);
+}
+.el-grid {
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(var(--grid-column-min-width), 100%), 1fr)
+  );
+}
+
+/* IMPOSTER-LAYOUT */
+.el-imposter {
+  --imposter-position: absolute;
+  --imposter-margin: var(--s0);
+  position: var(--imposter-position);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.el-imposter > :first-child {
+  overflow: auto;
+  max-width: calc(100% - (var(--imposter-margin) * 2));
+  max-height: calc(100% - (var(--imposter-margin) * 2));
+}
+
+/* REEL-LAYOUT */
+.el-reel {
+  --reel-height: auto;
+  --reel-margin: var(--s0);
+  --reel-flex-basis: auto;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: var(--reel-height);
+}
+.el-reel > * {
+  flex-basis: var(--reel-flex-basis);
+}
+.el-reel > * + * {
+  margin-left: var(--reel-margin);
+}
+.el-reel > img {
+  height: 100%;
+  flex-basis: auto;
+  width: auto;
+}
+
+/* SIDEBAR-LAYOUT */
+/* 
+ * Needs wrapper element inside container.
+ */
+.el-sidebar {
+  overflow: hidden;
+}
+.el-sidebar > * {
+  --sidebar-flex-basis: initial;
+  --sidebar-min-width: 50%;
+  --sidebar-margin: var(--s0);
+  display: flex;
+  flex-wrap: wrap;
+  margin: calc(var(--sidebar-margin) / 2 * -1);
+}
+.el-sidebar > * > :first-child {
+  margin: calc(var(--sidebar-margin) / 2);
+  flex-basis: var(--sidebar-flex-basis);
+  flex-grow: 1;
+}
+.el-sidebar > * > :last-child {
+  flex-basis: 0;
+  flex-grow: 999;
+  /* min-width: var(--sidebar-min-width); */
+  margin: calc(var(--sidebar-margin) / 2);
+  min-width: calc(var(--sidebar-min-width) - var(--sidebar-margin));
+}
+
+/* STACK-LAYOUT */
+.el-stack {
+  --stack-margin: var(--s0);
+  --stack-split: var(--zero);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+.el-stack > :first-child:nth-last-child(2) {
+  margin-bottom: var(--stack-split);
+}
+.el-stack > * + * {
+  margin-top: var(--stack-margin);
+}
+.el-stack > :only-child {
+  height: 100%;
+}
+
+/* SWITCHER-LAYOUT */
+/* 
+ * Needs wrapper element inside container.
+ */
+.el-switcher {
+  --switcher-margin: var(--s0);
+  --switcher-min-width: var(--measure);
+}
+.el-switcher > * {
+  display: flex;
+  flex-wrap: wrap;
+  margin: calc(var(--switcher-margin) / 2 * -1);
+}
+.el-switcher > * > * {
+  flex-grow: 1;
+  flex-basis: calc(
+    (var(--switcher-min-width) - (100% - var(--switcher-margin))) * 999
+  );
+  margin: calc(var(--switcher-margin) / 2);
+}
+.el-switcher > * > :nth-child(2):nth-last-child(2) {
+  flex-grow: 2;
+}

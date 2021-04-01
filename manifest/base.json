@@ -20,7 +20,7 @@
   },
 
   "background": {
-    "scripts": []
+    "scripts": ["background.js"]
   },
 
   "permissions": ["tabs", "https://tagom.io/*", "https://tagomio.github.io/*"]

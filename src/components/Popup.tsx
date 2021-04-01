@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { browser } from "webextension-polyfill-ts";
+import { Tagger } from "./";
 
 const Popup = () => {
   const [tabUrl, setTabUrl] = useState("");
@@ -18,6 +19,7 @@ const Popup = () => {
     <div className="el-cover">
       <h1 className="el-center">tagom</h1>
       <p className="el-center">add tags for {tabUrl}</p>
+      <Tagger></Tagger>
     </div>
   );
 };
